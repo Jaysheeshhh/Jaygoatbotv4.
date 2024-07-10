@@ -49,10 +49,10 @@ onReply: async function({ api, event, Reply, getLang, commandName, prefix }) {
             if (isNaN(singleIndex) || singleIndex <= 0 || singleIndex > Reply.pending.length) return api.sendMessage(getLang("invaildNumber", singleIndex), threadID, messageID);
             api.sendMessage(`✅ 𝗖𝗢𝗡𝗡𝗘𝗖𝗧𝗘𝗗 𝗦𝗨𝗖𝗖𝗘𝗦! 
 
-➭ BotName: 義 𝗚𝗶𝘆𝘂 | 🌊 勇
+➭ BotName: 𝗠𝗶𝗰𝗮🎀
 ➭ Bot Prefix: ⟨ / ⟩
-➭ Admin: ⟨ 𝗚𝗔𝗕 𝗬𝗨 ⟩
-➭ Ownerlink: ‹https://www.facebook.com/100079114908948›
+➭ Admin: ⟨ 𝗝𝗔𝗬 ⟩
+➭ Ownerlink: ‹https://www.facebook.com/100045526235882›
 ➭ Use /help to view command details`, Reply.pending[singleIndex - 1].threadID);
             count+=1;
         }
