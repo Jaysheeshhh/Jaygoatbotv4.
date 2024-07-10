@@ -17,19 +17,19 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "61562362827346",
-    "100075058221244"
+    "100045526235882",
+    "100079114908948"
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "OWNER": "Gab Yu",
+  "OWNER": "Jay",
   "AGE": "14",
   "GENDER": "MALE",
-  "nickNameBot": "義 𝗚𝗶𝘆𝘂 | 🌊 勇",
-  "FACEBOOK": "https://www.facebook.com/ 61562362827346",
+  "nickNameBot": "𝗠𝗶𝗰𝗮🎀",
+  "FACEBOOK": "https://www.facebook.com/profile.php?id=100045526235882",
   "prefix": "/",
   "database": {
     "type": "sqlite",
