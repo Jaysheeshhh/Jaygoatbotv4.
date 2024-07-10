@@ -17,15 +17,15 @@ module.exports = {
 	onStart: async function ({ api, event }) {
 		try {
 			const ownerInfo = {
-				name: '𝗚𝗔𝗕 𝗬𝗨',
-				gender: '𝗠𝗔𝗟𝗘',
-				hobby: '𝗠𝗔𝗞𝗜𝗡𝗚 𝗕𝗢𝗧𝗦',
-				Fb: 'https://facebook.com/ 61562362827346',
-				Relationship: '𝘄𝗶𝘁𝗵 𝘁𝗿𝗶𝘅𝗶𝗲',
-				bio: '𝗕𝗮𝗹𝗶𝗸 𝗻𝘆𝗼 𝗺𝗮𝗶𝗻 𝗮𝗰𝗰𝗼𝘂𝗻𝘁 𝗸𝗼! '
+				name: '𝗝𝗮𝘆',
+				gender: '𝗠𝗮𝗹𝗲',
+				hobby: '𝗖𝗼𝗼𝗸𝗶𝗻𝗴 𝗮𝗻𝗱 𝗽𝗹𝗮𝘆𝗶𝗻𝗴 𝗖𝗵𝗲𝘀𝘀,𝗕𝗮𝘀𝗸𝗲𝘁𝗯𝗮𝗹𝗹,𝗧𝗮𝗸𝗿𝗮𝘄,𝗥𝗼𝗯𝗹𝗼𝘅.',
+				Fb: '𝗝𝗮𝘆 𝗣𝗶𝗹𝗹𝗼𝗻𝗮𝗿',
+				Relationship: '𝗦𝗶𝗻𝗴𝗹𝗲',
+				bio: '𝗶𝗱𝗸 𝗜'𝗺 𝗷𝘂𝘀 𝗹𝗲𝗮𝗿𝗻𝗶'𝗻 𝗯𝗲𝗶𝗻 𝗮 𝗯𝗼𝘁 𝗱𝗲𝘃.'
 			};
 
-			const bold = 'https://i.imgur.com/f00YmuI.mp4';
+			const bold = 'https://i.imgur.com/wqTUK0c.mp4';
 			const tmpFolderPath = path.join(__dirname, 'tmp');
 
 			if (!fs.existsSync(tmpFolderPath)) {
