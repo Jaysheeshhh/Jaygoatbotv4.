@@ -1,4 +1,4 @@
-const { GoatWrapper } = require('fca-liane-utils');
+mica.js const { GoatWrapper } = require('fca-liane-utils');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -20,7 +20,7 @@ module.exports = {
 				name: '𝗠𝗶𝗰𝗮🎀',
 				gender: '𝗙𝗲𝗺𝗮𝗹𝗲',
 				hobby: '𝗦𝗲𝗿𝘃𝗶𝗻𝗴 𝘂𝘀𝗲𝗿𝘀',
-				Fb: '𝗜 𝘄𝗼𝗻'𝘁 𝘁𝗲𝗹𝗹 𝗶𝘁',
+				Fb: '𝗜 𝘄𝗼𝗻𝘁 𝘁𝗲𝗹𝗹 𝗶𝘁',
 				Relationship: '𝗦𝗶𝗻𝗴𝗹𝗲',
 				bio: '𝗜 𝘄𝗮𝘀 𝗱𝗲𝗽𝗹𝗼𝘆𝗲𝗱 𝗯𝘆 𝗺𝘆 𝗮𝗱𝗺𝗶𝗻 𝗷𝗮𝘆..'
 			};
