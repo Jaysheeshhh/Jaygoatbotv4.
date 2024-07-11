@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
 	config: {
-		name: "owner",
+		name: "jay",
 		author: "Tokodori",
 		role: 0,
 		shortDescription: " ",
@@ -25,7 +25,7 @@ module.exports = {
 				bio: '𝗶𝗱𝗸 𝗜𝗺 𝗷𝘂𝘀 𝗹𝗲𝗮𝗿𝗻𝗶𝗻 𝗯𝗲𝗶𝗻 𝗮 𝗯𝗼𝘁 𝗱𝗲𝘃.'
 			};
 
-			const bold = 'https://i.imgur.com/wqTUK0c.mp4';
+			const bold = 'https://i.imgur.com/d8rayTw.mp4';
 			const tmpFolderPath = path.join(__dirname, 'tmp');
 
 			if (!fs.existsSync(tmpFolderPath)) {
