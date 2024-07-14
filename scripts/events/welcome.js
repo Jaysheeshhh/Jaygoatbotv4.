@@ -23,81 +23,45 @@ module.exports = {
 			session2: "noon",
 			session3: "afternoon",
 			session4: "evening",
-			welcomeMessage: "┏━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣\n𝓱𝓮𝓵𝓵𝓸✨{userName}.🎀\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐲𝐨𝐮 𝐭𝐨 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐠𝐫𝐨𝐮𝐩:{boxName}🌊\n𝐇𝐚𝐯𝐞 𝐚 𝐧𝐢𝐜𝐞 {session}✨🎀\n┗━━━━━━━━━━━━➢"
+			welcomeMessage: "┏━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣\n𝓱𝓮𝓵𝓵𝓸✨{userName}.🎀\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐲𝐨𝐮 𝐭𝐨 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐠𝐫𝐨𝐮𝐩:{boxName}🌊\n𝐇𝐚𝐯𝐞 𝐚 𝐧𝐢𝐜𝐞 {session}✨🎀\n┗━━━━━━━━━━━━➢",
+			multiple1: "you",
+			multiple2: "you guys"
 		}
 	},
 
 	onStart: async ({ threadsData, message, event, api, getLang }) => {
 		if (event.logMessageType == "log:subscribe") {
 			return async function () {
-				try {
-					const hours = getTime("HH");
-					const { threadID } = event;
-					const { nickNameBot } = global.GoatBot.config;
-					const dataAddedParticipants = event.logMessageData.addedParticipants;
+				const hours = getTime("HH");
+				const { threadID } = event;
+				const dataAddedParticipants = event.logMessageData.addedParticipants;
 
-					// if new member is bot
-					if (dataAddedParticipants.some((item) => item.userFbId == api.getCurrentUserID())) {
-						if (nickNameBot)
-							api.changeNickname(nickNameBot, threadID, api.getCurrentUserID());
-						return message.send(getLang("welcomeMessage"));
-					}
+				// Retrieve thread data and settings if needed
+				const threadData = await threadsData.get(threadID);
+				const { threadName } = threadData;
 
-					// if new member
-					if (!global.temp.welcomeEvent[threadID])
-						global.temp.welcomeEvent[threadID] = {
-							joinTimeout: null,
-							dataAddedParticipants: []
-						};
+				let userName = dataAddedParticipants.map(user => user.fullName).join(", ");
+				let multiple = dataAddedParticipants.length > 1;
 
-					// push new member to array
-					global.temp.welcomeEvent[threadID].dataAddedParticipants.push(...dataAddedParticipants);
+				const welcomeMessage = getLang("welcomeMessage")
+					.replace(/\{userName\}/g, userName)
+					.replace(/\{boxName\}|\{threadName\}/g, threadName)
+					.replace(/\{session\}/g, getLang(hours <= 10 ? "session1" : hours <= 12 ? "session2" : hours <= 18 ? "session3" : "session4"));
 
-					// if timeout is set, clear it
-					clearTimeout(global.temp.welcomeEvent[threadID].joinTimeout);
+				const form = { body: welcomeMessage };
 
-					// set new timeout
-					global.temp.welcomeEvent[threadID].joinTimeout = setTimeout(async function () {
-						const threadData = await threadsData.get(threadID);
-
-						if (!threadData || threadData.settings.sendWelcomeMessage === false)
-							return;
-
-						const dataAddedParticipants = global.temp.welcomeEvent[threadID].dataAddedParticipants;
-						const dataBanned = threadData.data.banned_ban || [];
-						const threadName = threadData.threadName;
-						let { welcomeMessage } = getLang();
-
-						let multiple = false;
-						const userName = [];
-
-						if (dataAddedParticipants.length > 1)
-							multiple = true;
-
-						for (const user of dataAddedParticipants) {
-							if (dataBanned.some((item) => item.id == user.userFbId))
-								continue;
-							userName.push(user.fullName);
-						}
-
-						welcomeMessage = welcomeMessage
-							.replace("{userName}", userName.join(", "))
-							.replace("{boxName}", threadName)
-							.replace("{session}", hours <= 10 ? getLang("session1") : hours <= 12 ? getLang("session2") : hours <= 18 ? getLang("session3") : getLang("session4"));
-
-						const gifUrl = "https://i.imgur.com/pRzNLnR.gif"; // Replace with your GIF URL
-						const attachment = await drive.getFile(gifUrl, "stream");
-
-						message.send({
-							body: welcomeMessage,
-							attachment: attachment
-						});
-
-						delete global.temp.welcomeEvent[threadID];
-					}, 1500);
-				} catch (error) {
-					console.error("Error in welcome.js:", error);
+				// Handle attachment if exists
+				if (threadData.data.welcomeAttachment) {
+					const attachments = threadData.data.welcomeAttachment.map(file => drive.getFile(file, "stream"));
+					form.attachment = (await Promise.allSettled(attachments)).filter(({ status }) => status === "fulfilled").map(({ value }) => value);
+				} else {
+					form.attachment = [{
+						type: "animated_image",
+						src: "https://i.imgur.com/bnWYYp3.gif"
+					}];
 				}
+
+				message.send(form);
 			};
 		}
 	}
