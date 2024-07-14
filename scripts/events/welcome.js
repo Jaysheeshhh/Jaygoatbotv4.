@@ -19,14 +19,14 @@ module.exports = {
             welcomeMessage: "Cảm ơn bạn đã mời tôi vào nhóm!\nPrefix bot: %1\nĐể xem danh sách lệnh hãy nhập: %1help",
             multiple1: "bạn",
             multiple2: "các bạn",
-            defaultWelcomeMessage: "Xin chào {userName}.\nChào mừng bạn đến với {boxName}.\nChúc bạn có buổi {session} vui vẻ!"
+            defaultWelcomeMessage: "┏━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣\n𝓱𝓮𝓵𝓵𝓸✨{userName}.🎀\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐲𝐨𝐮 𝐭𝐨 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐠𝐫𝐨𝐮𝐩:{boxName}🌊\n𝐇𝐚𝐯𝐞 𝐚 𝐧𝐢𝐜𝐞 {session}✨🎀\n┗━━━━━━━━━━━━➢"
         },
         en: {
             session1: "morning",
             session2: "noon",
             session3: "afternoon",
             session4: "evening",
-            welcomeMessage: "𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝗶𝗻𝘃𝗶𝘁𝗶𝗻𝗴 𝗺𝗲 𝘁𝗼 𝘁𝗵𝗲 𝗴𝗿𝗼𝘂𝗽!\n𝗕𝗼𝘁 𝗽𝗿𝗲𝗳𝗶𝘅: %1\n𝗧𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗹𝗶𝘀𝘁 𝗼𝗳 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀, 𝗽𝗹𝗲𝗮𝘀𝗲 𝗲𝗻𝘁𝗲𝗿: %1𝗵𝗲𝗹𝗽",
+            welcomeMessage: "Thank you for inviting me to the group!\nBot prefix: %1\nTo view the list of commands, please enter: %1help",
             multiple1: "you",
             multiple2: "you guys",
             defaultWelcomeMessage: "┏━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣\n𝓱𝓮𝓵𝓵𝓸✨{userName}.🎀\n𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐲𝐨𝐮 𝐭𝐨 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐠𝐫𝐨𝐮𝐩:{boxName}🌊\n𝐇𝐚𝐯𝐞 𝐚 𝐧𝐢𝐜𝐞 {session}✨🎀\n┗━━━━━━━━━━━━➢"
@@ -75,7 +75,7 @@ module.exports = {
             global.temp.welcomeEvent[threadID].joinTimeout = setTimeout(async function () {
                 const threadData = await threadsData.get(threadID);
 
-                if (threadData.settings.sendWelcomeMessage == false) {
+                if (threadData.settings.sendWelcomeMessage === false) {
                     return;
                 }
 
@@ -101,7 +101,7 @@ module.exports = {
                     });
                 }
 
-                if (userName.length == 0) {
+                if (userName.length === 0) {
                     return;
                 }
 
