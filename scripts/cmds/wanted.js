@@ -3,7 +3,7 @@ const fs = require("fs-extra");
 
 module.exports = {
   config: {
-    name: "wanted2",
+    name: "wanted",
     version: "1.0",
     author: "KSHITIZ",
     countDown: 1,
@@ -51,7 +51,7 @@ let avt = await new DIG.Wanted().getImage(url)
  
       const pathSave = `${__dirname}/tmp/wanted.png`;
   fs.writeFileSync(pathSave, Buffer.from(avt));
-    let body = "FINDING THIS SHIT"
+    let body = "FINDING THIS USER🔍"
     if(!mention[0]) body="FINDING THIS USER🔍"
     message.reply({body:body,
 attachment: fs.createReadStream(pathSave)
