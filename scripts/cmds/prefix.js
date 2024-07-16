@@ -96,7 +96,7 @@ module.exports = {
 
     // Randomly choose between the two links
     const links = [
-      "https://i.imgur.com/gXZTXZw.mp4",
+      "https://i.imgur.com/OFoF4U4.mp4",
       "https://i.imgur.com/2Sp2Ctd.jpeg"
     ];
     const chosenLink = links[Math.floor(Math.random() * links.length)];
