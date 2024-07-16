@@ -69,7 +69,7 @@ module.exports = {
 "https://i.imgur.com/2Sp2Ctd.jpeg",
 "https://i.imgur.com/2Sp2Ctd.jpeg', ",
 "https://i.imgur.com/2Sp2Ctd.jpeg",
-"https://i.imgur.com/2Sp2Ctd.jpeg",
+"https://i.imgur.com/gXZTXZw.mp4",
 "https://i.imgur.com/d8rayTw.mp4",
 "https://i.imgur.com/C7IOcbv.mp4",
 "https://i.imgur.com/yevluzl.mp4"
