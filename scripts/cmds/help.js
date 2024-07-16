@@ -9,7 +9,7 @@ module.exports = {
   config: {
     name: "help",
     version: "1.17",
-    author: "NTKhang", // orginal author Kshitiz
+    author: "NTKhang", // pogi si jay..
     countDown: 0,
     role: 0,
     shortDescription: {
@@ -67,9 +67,9 @@ module.exports = {
       const helpListImages = [
  
 "https://i.imgur.com/2Sp2Ctd.jpeg",
-"https://i.imgur.com/2Sp2Ctd.jpeg', ",
+"https://i.imgur.com/OFoF4U4.mp4', ",
 "https://i.imgur.com/2Sp2Ctd.jpeg",
-"https://i.imgur.com/gXZTXZw.mp4",
+"https://i.imgur.com/OFoF4U4.mp4",
 "https://i.imgur.com/d8rayTw.mp4",
 "https://i.imgur.com/C7IOcbv.mp4",
 "https://i.imgur.com/yevluzl.mp4"
