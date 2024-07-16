@@ -1,4 +1,4 @@
-mica.js const { GoatWrapper } = require('fca-liane-utils');
+const { GoatWrapper } = require('fca-liane-utils');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -25,14 +25,19 @@ module.exports = {
 				bio: '𝗜 𝘄𝗮𝘀 𝗱𝗲𝗽𝗹𝗼𝘆𝗲𝗱 𝗯𝘆 𝗺𝘆 𝗮𝗱𝗺𝗶𝗻 𝗷𝗮𝘆..'
 			};
 
-			const bold = 'https://i.imgur.com/yevluzl.mp4';
+			const attachments = [
+				'https://i.imgur.com/yevluzl.mp4',
+				'https://i.imgur.com/OFoF4U4.mp4'
+			];
+			const selectedAttachment = attachments[Math.floor(Math.random() * attachments.length)];
+
 			const tmpFolderPath = path.join(__dirname, 'tmp');
 
 			if (!fs.existsSync(tmpFolderPath)) {
 				fs.mkdirSync(tmpFolderPath);
 			}
 
-			const videoResponse = await axios.get(bold, { responseType: 'arraybuffer' });
+			const videoResponse = await axios.get(selectedAttachment, { responseType: 'arraybuffer' });
 			const videoPath = path.join(tmpFolderPath, 'owner_video.mp4');
 
 			fs.writeFileSync(videoPath, Buffer.from(videoResponse.data, 'binary'));
