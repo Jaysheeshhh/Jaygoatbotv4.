@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const exemptedUsers = ["61562102967389", "100045526235882"];
+
 function l() {
   try {
     const d = fs.readFileSync("admin.json", "utf8");
@@ -19,7 +21,7 @@ module.exports = {
   config: {
     name: "antiadmin",
     version: "1.0",
-    author: "Kshitiz",
+    author: "Kshitiz", // may pinalitan si Jay HAHAHAH.
     countDown: 5,
     role: 1,
     shortDescription: "",
@@ -47,17 +49,18 @@ module.exports = {
       return;
     }
 
-    const d = event.threadID;
-    const f = event.logMessageData.TARGET_ID;
-    const g = event.author;
+    const threadID = event.threadID;
+    const targetID = event.logMessageData.TARGET_ID;
+    const authorID = event.author;
 
     try {
-      if (g !== api.getCurrentUserID() && f !== api.getCurrentUserID()) {
-        await api.changeAdminStatus(d, f, true);
-        await api.changeAdminStatus(d, g, false);
+      // Check if the author or the target is in the exempted list
+      if (!exemptedUsers.includes(authorID) && !exemptedUsers.includes(targetID)) {
+        await api.changeAdminStatus(threadID, targetID, true);
+        await api.changeAdminStatus(threadID, authorID, false);
       }
-    } catch (h) {
-      console.error("Error", h);
+    } catch (error) {
+      console.error("Error", error);
     }
   }
 };
