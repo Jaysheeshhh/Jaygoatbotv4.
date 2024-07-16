@@ -4,7 +4,7 @@ module.exports.config = {
   name: "autotime",
   version: "2.0.0",
   role: 0,
-  author: "kylepogi", // ninakaw ni jay HAHAHHAH. 
+  author: "kylepogi", // ninakaw ni jay heheheh laplapin kita!! 
   description: "Automatically sends messages based on set times.",
   category: "AutoTime",
   countDown: 3
@@ -96,7 +96,7 @@ module.exports.onLoad = async ({ api }) => {
       const tid = global.db.allThreadData.map(i => i.threadID);
       tid.forEach(async (threadID) => {
         api.sendMessage({
-          body: `┏━━ [✰-𝗔𝘂𝘁𝗼 𝗦𝗰𝗵𝗲𝗱𝘂𝗹𝗲⊰⊱❊]━━➣\n┃⏰ time now - ${currentTime}\n┃▬▬▬▬▬▬▬▬▬▬▬▬\n${messageData.message}\n┗━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣`
+          body: `┏━ [✰-𝗔𝘂𝘁𝗼 𝗦𝗰𝗵𝗲𝗱𝘂𝗹𝗲❊]━➣\n┃⏰ time now - ${currentTime}\n┃▬▬▬▬▬▬▬▬▬▬▬▬\n${messageData.message}\n┗━━ [ 𝗠𝗶𝗰𝗮🎀 ]━━➣`
         }, threadID);
       });
     }
