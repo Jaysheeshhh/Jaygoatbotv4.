@@ -64,7 +64,7 @@ module.exports.onLoad = async ({ api }) => {
         message: "┃📌 magandang hapon mga lods😸"
       },
       "05:00:00 PM": {
-        message: "┃📌 pogi ng owner ko na si Kyle 😎"
+        message: "┃📌 pogi ng owner ko na si Jay 😎"
       },
       "06:00:00 PM": {
         message: "┃📌 don't forget to eat y'all dinner💀🙏"
