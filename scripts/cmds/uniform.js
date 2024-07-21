@@ -19,7 +19,7 @@ module.exports = {
     },
 
     onStart: async function ({ message }) {
-        const uniformInfo = `𝐔𝐍𝐈𝐅𝐎𝐑𝐌☆\n-BOY/GIRL👭♦️\nSHIRT:18178580102\nPANTS:8843663727\n*/It's up to you if you want to change the pants`;
+        const uniformInfo = `𝐔𝐍𝐈𝐅𝐎𝐑𝐌☆🥋\n-BOYS♦️\nSHIRT👔:18555900580\nPANTS👖:18569230680\nSCYTHE🗡️:18275328462\n\nGIRLS🎀\nSHIRT👔:18555900580\nPANTS👖:18556765249\nSCYTHE🗡️:18275328462\n*/It's up to you if you want to change the pants`;
         message.reply(uniformInfo);
     }
 };
