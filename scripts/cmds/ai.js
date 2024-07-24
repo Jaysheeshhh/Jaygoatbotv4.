@@ -1,66 +1,57 @@
-const { getPrefix, getStreamFromURL, uploadImgbb } = global.utils;
-async function ai({ message: m, event: e, args: a, usersData: u }) {
-  var p = [`${await getPrefix(e.threadID)}${this.config.name}`,
-`${this.config.name}`
-/*"ai"
-*""
-*/
-]; 
- if (p.some(b => a[0].toLowerCase().startsWith(b))) {
-try {      
-let prompt = "";
-if (e.type === "message_reply" && e.messageReply.attachments && e.messageReply.attachments[0]?.type === "photo") {
- const b = await uploadImgbb(e.messageReply.attachments[0].url);
-prompt = a.slice(1).join(" ") + ' ' + b.image.url;
-} else {
- prompt = a.slice(1).join(" ");
-}
- var __ = [{ id: e.senderID, tag: await u.getName(e.senderID) }];
- const r = await require("axios").post(`https://test-ai-ihc6.onrender.com/api`, {
-  prompt: prompt,
- apikey: "GayKey-oWHmMb1t8ASljhpgSSUI",
-  name: __[0]['tag'],
- id: __[0]['id'],
- });
-var _ = r.data.result.replace(/{name}/g, __[0]['tag']).replace(/{pn}/g, p[0]);
- if (r.data.av) {
- if (Array.isArray(r.data.av)) {
- const avs = r.data.av.map(url => getStreamFromURL(url));
- const avss = await Promise.all(avs);
-  m.reply({
- body: _,
- mentions: __,
- attachment: avss
- });
- } else {
- m.reply({
- body: _,
- mentions: __,
-attachment: await getStreamFromURL(r.data.av)
-  });
-  }
-  } else {
-m.reply({
-body: _,
-mentions: __
-  });
-  }
-  } catch (error) {
- m.reply("Error " + error);
- }
- }
-}
+const axios = require('axios');
+
 module.exports = {
-config: {
- name: "ai",
-aliases: [],
-version: 1.6,
-author: "Jun",
-role: 0,
- shortDescription: "An AI that can do various tasks",
- guide: "{pn} <query>",
- category: "AI"
- },
- onStart: function() {},
- onChat: ai
+  config: {
+    name: 'ai',
+    version: '1.0',
+    author: 'LiANE @nealianacagara',
+    role: 0,
+    category: 'Ai-Chat',
+    shortDescription: {
+      en: `A custom artificial intelligence designed and created by Liane Cagara with purpose to interact with users like you in a personalized and informative manner. Trained on a vast amount of text data.`
+    },
+    longDescription: {
+      en: `A custom artificial intelligence designed and created by Liane Cagara with purpose to interact with users like you in a personalized and informative manner. Trained on a vast amount of text data.`
+    },
+    guide: {
+      en: '[query]'
+    },
+  },
+
+  onStart: async function ({ api, event, args, usersData }) {
+    try {
+      const query = args.join(" ") || "hello";
+      const user = await usersData.get(event.senderID);
+      const name = user ? user.name : "a user";
+      const currentDateTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Manila", hour12: true });
+
+      api.setMessageReaction("⏳", event.messageID, (err) => console.log(err), true);
+      const processingMessage = await api.sendMessage(
+        `Asking. Please wait a moment...`,
+        event.threadID
+      );
+
+      const apiUrl = `https://liaspark.chatbotcommunity.ltd/@LianeAPI_Reworks/api/axis?key=j86bwkwo-8hako-12C&userName=${encodeURIComponent(name)}&query=${encodeURIComponent(query)}`;
+      const response = await axios.get(apiUrl);
+
+      if (response.data && response.data.message) {
+        const trimmedMessage = response.data.message.trim();
+        const responseMessage = `𝗠𝗶𝗰𝗮🎀\n━━━━━━━━━━━━━━━━\n➤𝘼𝙘𝙚 𝘼𝙙𝙫𝙤𝙘𝙖𝙩𝙚𝙨 (𝘼𝘼𝙂)♦\n\n${trimmedMessage}\n━━━━━━━━━━━━━━━━\n🗣 Asked by: ${name}\n⏰ 𝑅𝑒𝑠𝑝𝑜𝑛𝑑 𝑇𝑖𝑚𝑒: ${currentDateTime}`;
+
+        api.setMessageReaction("✅", event.messageID, (err) => console.log(err), true);
+        await api.sendMessage({ body: responseMessage }, event.threadID, event.messageID);
+
+        console.log(`Sent 𝗠𝗶𝗰𝗮🎀's response to the user`);
+      } else {
+        throw new Error(`Invalid or missing response from 𝗠𝗶𝗰𝗮🎀 API`);
+      }
+
+      await api.unsendMessage(processingMessage.messageID);
+    } catch (error) {
+      console.error(`❌ | Failed to get 𝗠𝗶𝗰𝗮🎀's response: ${error.message}`);
+      const currentDateTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Manila", hour12: true });
+      const errorMessage = `𝗠𝗶𝗰𝗮🎀\n━━━━━━━━━━━━━━━━\n⛔ 𝗡𝗼𝘁 𝗙𝗼𝘂𝗻𝗱\n\nThe AI you're trying to access doesn't exist or is unavailable, please try again later!\n━━━━━━━━━━━━━━━━\n🗣 Asked by: ${name}\n⏰ 𝑅𝑒𝑠𝑝𝑜𝑛𝑑 𝑇𝑖𝑚𝑒: ${currentDateTime}`;
+      api.sendMessage(errorMessage, event.threadID);
+    }
+  },
 };
