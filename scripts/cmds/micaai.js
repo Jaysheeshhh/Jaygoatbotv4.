@@ -1,4 +1,5 @@
 const axios = require('axios');
+const moment = require('moment');
 
 async function a(api, event, args, message) {
   try {
@@ -8,14 +9,33 @@ async function a(api, event, args, message) {
       return message.reply("ex: {p}mica {prompt} ");
     }
 
-    const b = "you are mica ai"; // the more better content you give the  best it became
+    const b = "you are mica ai"; // the more better content you give the best it became
     const c = await d(a, b);
 
     if (c.code === 2 && c.message === "success") {
-      message.reply(c.answer, (r, s) => {
-        global.GoatBot.onReply.set(s.messageID, {
-          commandName: module.exports.config.name,
-          uid: event.senderID 
+      // Fetch user info to get the name
+      api.getUserInfo(event.senderID, (err, userInfo) => {
+        if (err) {
+          console.error("Error fetching user info:", err);
+          return message.reply("An error occurred while fetching user information.");
+        }
+
+        const senderName = userInfo[event.senderID].name;
+        const now = new Date();
+        const responseTime = moment(now).utcOffset('+08:00').format('DD/MM/YYYY, HH:mm:ss A'); // Manila time
+        const responseMessage = `
+𝗠𝗶𝗰𝗮🎀 
+━━━━━━━━━━━━━━━━
+${c.answer}
+━━━━━━━━━━━━━━━━
+🗣 Asked by: ${senderName}
+⏰ 𝑅𝑒𝑠𝑝𝑜𝑛𝑑 𝑇𝑖𝑚𝑒: ${responseTime}
+        `;
+        message.reply(responseMessage, (r, s) => {
+          global.GoatBot.onReply.set(s.messageID, {
+            commandName: module.exports.config.name,
+            uid: event.senderID 
+          });
         });
       });
     } else {
